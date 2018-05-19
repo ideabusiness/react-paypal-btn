@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "paypal-checkout": "4.0.202",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-scripts": "1.1.4",
+    "styled-components": "3.2.6"
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.3",
+    "eslint": "4.9.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-react": "7.4.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "lint": "eslint src",
+    "build": "react-scripts build"
+  }
+}
