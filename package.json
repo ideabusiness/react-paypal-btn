@@ -1,19 +1,19 @@
 {
   "dependencies": {
     "paypal-checkout": "4.0.202",
-    "react": "16.3.2",
-    "react-dom": "16.3.2",
+    "react": "16.4.0",
+    "react-dom": "16.4.0",
     "react-scripts": "1.1.4",
-    "styled-components": "3.2.6"
+    "styled-components": "3.3.2"
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",
-    "eslint": "4.9.0",
+    "eslint": "4.19.1",
     "eslint-config-airbnb": "16.1.0",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jsx-a11y": "6.0.2",
-    "eslint-plugin-react": "7.4.0",
-    "gh-pages": "1.1.0"
+    "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.9.1",
+    "gh-pages": "1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +21,5 @@
     "predeploy": "react-scripts build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://sonaye.github.io/react-paypal-button"
+  "homepage": "https://sonaye.github.io/react-paypal-btn"
 }

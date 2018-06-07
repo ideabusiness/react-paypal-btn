@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const PaypalButton = paypal.Button.driver('react', { React, ReactDOM });
 
 export default class App extends Component {
-  state = { res: null };
+  state = { status: 'READY', res: null };
 
   render() {
     const opts = {
@@ -21,7 +21,7 @@ export default class App extends Component {
       },
 
       payment() {
-        let { env, client } = this.props;
+        const { env, client } = this.props;
 
         return paypal.rest.payment.create(env, client, {
           payment: {
@@ -41,18 +41,18 @@ export default class App extends Component {
       commit: true,
 
       onAuthorize: (data, actions) => {
-        return actions.payment
+        actions.payment
           .execute()
-          .then(res => this.setState({ res }))
-          .catch(err => this.setState({ res: err.message }));
+          .then(res => this.setState({ status: 'AUTHORIZED', res }))
+          .catch(err => this.setState({ status: 'ERROR', res: err.message }));
       },
 
       onCancel: res => {
-        this.setState({ res });
+        this.setState({ status: 'CANCELED', res });
       },
 
       onError: err => {
-        this.setState({ res: err.message });
+        this.setState({ status: 'ERROR', res: err.message });
       },
 
       // locale: 'ar_SA'
@@ -71,7 +71,7 @@ export default class App extends Component {
       <Container>
         <PaypalButton {...opts} />
 
-        {res && <Res>{JSON.stringify(res, null, 2)}</Res>}
+        {res && <Res>{JSON.stringify(this.state, null, 2)}</Res>}
       </Container>
     );
   }
