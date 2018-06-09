@@ -9,38 +9,41 @@ const PaypalBtn = paypal.Button.driver('react', { React, ReactDOM });
 export default class Btn extends Component {
   static propTypes = {
     currency: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    env: PropTypes.oneOf(['sandbox', 'production']),
+    description: PropTypes.string,
     experience: PropTypes.object,
     onAuthorize: PropTypes.func,
     onError: PropTypes.func,
-    payment: PropTypes.object,
+    sandbox: PropTypes.bool,
     secret: PropTypes.string.isRequired,
+    style: PropTypes.object,
     total: PropTypes.number.isRequired
   };
 
   static defaultProps = {
     currency: 'USD',
-    env: 'sandbox',
+    description: undefined,
     experience: { input_fields: { no_shipping: 1 } },
     onAuthorize: () => null,
     onError: () => null,
-    payment: {}
+    sandbox: false,
+    style: { size: 'responsive' /* , tagline: false */ }
   };
 
   render() {
     const {
       currency,
       description,
-      env,
       experience,
       onAuthorize,
       onError,
-      payment,
+      sandbox,
       secret,
+      style,
       total,
       ...rest
     } = this.props;
+
+    const env = sandbox ? 'sandbox' : 'production';
 
     const client = { [env]: secret };
 
@@ -54,20 +57,21 @@ export default class Btn extends Component {
       onAuthorize: (data, actions) =>
         actions.payment
           .execute()
-          .then(res => onAuthorize(res))
-          .catch(err => onError(err)),
+          .then(onAuthorize)
+          .catch(onError),
 
       onError,
 
       payment: () =>
         paypal.rest.payment.create(env, client, {
           payment: {
-            transactions: [{ amount: { total, currency }, description }],
-            ...payment
+            transactions: [{ amount: { total, currency }, description }]
           },
 
           experience
         }),
+
+      style,
 
       ...rest
     };

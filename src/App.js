@@ -10,19 +10,23 @@ export default class App extends Component {
   render() {
     return (
       <Container>
-        <PaypalBtn
-          // currency="SAR"
-          // description="Invoice # 1"
-          // locale="ar_SA"
-          onAuthorize={res => this.setState({ status: 'AUTHORIZED', res })}
-          onCancel={res => this.setState({ status: 'CANCELED', res })}
-          onClick={() => console.log('CLICKED')}
-          onError={err => this.setState({ status: 'ERROR', res: err.message })}
-          // production
-          secret="AWi18rxt26-hrueMoPZ0tpGEOJnNT4QkiMQst9pYgaQNAfS1FLFxkxQuiaqRBj1vV5PmgHX_jA_c1ncL"
-          style={{ size: 'medium' /* , tagline: false */ }}
-          total={10}
-        />
+        <Btn>
+          <PaypalBtn
+            // currency="SAR"
+            description="Invoice # 1"
+            // locale="ar_SA"
+            onAuthorize={res => this.setState({ status: 'AUTHORIZED', res })}
+            onCancel={res => this.setState({ status: 'CANCELED', res })}
+            onClick={() => console.log('CLICKED')}
+            onError={err =>
+              this.setState({ status: 'ERROR', res: err.message })
+            }
+            sandbox
+            // https://developer.paypal.com/developer/applications/create
+            secret="AWi18rxt26-hrueMoPZ0tpGEOJnNT4QkiMQst9pYgaQNAfS1FLFxkxQuiaqRBj1vV5PmgHX_jA_c1ncL"
+            total={10}
+          />
+        </Btn>
 
         {this.state.res && <Res>{JSON.stringify(this.state, null, 2)}</Res>}
       </Container>
@@ -37,6 +41,10 @@ const Container = styled.div`
   flex-direction: column;
   flex: 1;
   justify-content: center;
+`;
+
+const Btn = styled.div`
+  width: 256px;
 `;
 
 const Res = styled.pre`
