@@ -1,6 +1,4 @@
 {
-  "name": "react-paypal-btn",
-  "version": "0.0.0",
   "main": "src/Btn.js",
   "dependencies": {
     "paypal-checkout": "4.0.202",
