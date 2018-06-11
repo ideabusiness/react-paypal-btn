@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import styled from 'styled-components';
+import styled from 'styled-components'; // eslint-disable-line import/no-extraneous-dependencies
 
-import PaypalBtn from './Btn';
+import PaypalBtn from '../lib';
+
+import './style.css';
 
 export default class App extends Component {
   state = { status: 'READY', res: null };
